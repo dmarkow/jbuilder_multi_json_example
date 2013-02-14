@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
     Jbuilder.encode do |json|
       json.users User.all do |user|
         json.name user.name
+
+        # This works fine
         json.posts user.posts, :name
       end
     end
@@ -23,6 +25,9 @@ class User < ActiveRecord::Base
     Jbuilder.encode do |json|
       json.users User.all do |user|
         json.name user.name
+
+        # This causes an error:
+        # NoMethodError: undefined method `key?' for #<JSON::Ext::Generator::State:0x007fd75cb41a78>
         json.posts user.posts
       end
     end
